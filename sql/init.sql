@@ -6,10 +6,15 @@ DROP TABLE if EXISTS `order_products`;
 CREATE TABLE users (
     id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(30) NOT NULL, -- ensure unique
-    password VARCHAR(30) NOT NULL,
-    admin SMALLINT NOT NULL DEFAULT 0 -- 1 if admin
+    password VARCHAR(30) NOT NULL
 );
 
+CREATE TABLE user_roles (
+    id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY;
+    user_id INT(11) NOT NULL,
+    role VARCHAR(10) DEFAULT 'user',
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
 
 /* Orders table */
 CREATE TABLE orders (
