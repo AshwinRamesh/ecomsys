@@ -20,7 +20,7 @@ CREATE TABLE user_roles (
 CREATE TABLE orders (
     id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     user_id INT(11) NOT NULL, -- make this a foreign key
-    status ENUM('processing', 'shipping', 'delivered'),
+    status ENUM('processing', 'shipping', 'delivered') DEFAULT 'processing',
     shipping_address_1 VARCHAR(255),
     shipping_address_2 VARCHAR(255),
     city VARCHAR(255) NOT NULL,
