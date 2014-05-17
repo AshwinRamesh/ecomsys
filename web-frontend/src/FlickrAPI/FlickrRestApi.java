@@ -1,3 +1,5 @@
+package FlickrAPI;
+
 import java.io.InputStream;
 import java.net.*;
 

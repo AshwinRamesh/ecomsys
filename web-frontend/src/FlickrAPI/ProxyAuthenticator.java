@@ -1,4 +1,4 @@
-package commons;
+package FlickrAPI;
 
 import java.net.*;
 
