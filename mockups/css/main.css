@@ -111,3 +111,19 @@
 .product-nav {
     padding-bottom: 10px;
 }
+
+.cart-modal {
+    width: 800px;
+}
+
+.cart-modal .modal-body {
+    padding-bottom: 5px;
+}
+
+.cart-modal .modal-footer {
+    margin-top: 0px;
+}
+
+.checkout-total {
+    text-align: right;
+}
