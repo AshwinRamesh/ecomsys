@@ -22,5 +22,13 @@
     <servlet-name>SearchForm</servlet-name>
     <url-pattern>/SearchForm</url-pattern>
   </servlet-mapping>
-  
+
+    <servlet>
+    <servlet-name>SearchResult</servlet-name>
+    <servlet-class>products.SearchResult</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SearchResult</servlet-name>
+    <url-pattern>/SearchResult</url-pattern>
+  </servlet-mapping>  
 </web-app>
