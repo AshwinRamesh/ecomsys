@@ -1,4 +1,4 @@
-package FlickrAPI;
+package products.model;
 
 public class FlickrPhoto {
 	private String photoId;
