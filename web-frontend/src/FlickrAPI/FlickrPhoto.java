@@ -1,3 +1,5 @@
+package FlickrAPI;
+
 public class FlickrPhoto {
 	private String photoId;
 	private String photoTitle;

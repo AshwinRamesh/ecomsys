@@ -1,3 +1,4 @@
+package FlickrAPI;
 public interface Constants {
 	public static final String API_KEY = "8f32593f2154ea505db9fe4cdb372c61";
 	//8f32593f2154ea505db9fe4cdb372c61
