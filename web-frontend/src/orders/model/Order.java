@@ -1,6 +1,8 @@
 package orders.model;
 
 public class Order {
+
+    private int orderId;
     private int userId;
     private String status;
     private String shippingAddress1;
@@ -20,6 +22,14 @@ public class Order {
         this.setPostCode(postcode);
         this.setFinalCost(cost);
 
+    }
+
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
+    }
+
+    public int getOrderId(){
+        return orderId;
     }
 
     public int getUserId() {

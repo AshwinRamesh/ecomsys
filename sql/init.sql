@@ -35,7 +35,7 @@ CREATE TABLE order_products (
     id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     product_id INT(11) NOT NULL,
     product_name VARCHAR(255) NOT NULL,
-    num_tags INT(4) DEFAULT 0,
+    description MEDIUMTEXT NOT NULL,
     quantity INT(4) DEFAULT 1,
     order_id INT(11) NOT NULL,
     FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE
