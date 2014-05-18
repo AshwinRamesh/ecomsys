@@ -1,6 +1,7 @@
 package orders.dao;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -38,7 +39,7 @@ public class OrderDAO {
     public Boolean insertOrder(Order o) {
         try{
             Connection c = ds.getConnection();
-            PreparedStatement ps = c.prepareStatement(createOrder);
+            PreparedStatement ps = c.prepareStatement(createOrder, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, String.valueOf(o.getUserId()));
             ps.setString(2, o.getStatus());
             ps.setString(3, o.getShippingAddress1());
@@ -46,11 +47,22 @@ public class OrderDAO {
             ps.setString(5, o.getCity());
             ps.setString(6, o.getPostCode());
             ps.setString(7, String.valueOf(o.getFinalCost()));
-            ps.executeUpdate();
+
+            int affectedRows = ps.executeUpdate();
+            if (affectedRows != 1) {
+            	throw new SQLException("Creating order failed");
+            }
+            ResultSet keys = ps.getGeneratedKeys();
+            if (keys.next()) {
+            	o.setOrderId(keys.getInt(1));
+            } else {
+            	throw new SQLException("Creating order failed");
+            }
             ps.close();
             c.close();
             return true;
         } catch (SQLException e) {
+        	System.out.println(e.getMessage());
             System.out.println("Error in creating order");
             return false;
         }
@@ -86,7 +98,15 @@ public class OrderDAO {
 
     public List<Order> getOrders() {
         try{
-            Connection c = ds.getConnection();
+        	System.out.println("worky");
+        	try {
+				Class.forName("com.mysql.jdbc.Driver");
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        	Connection c = DriverManager.getConnection("jdbc:mysql://localhost:3306/ecomsys", "root", "password");
+        	System.out.println("worky");
             PreparedStatement ps = c.prepareStatement(getAllOrders);
             ResultSet rs = ps.executeQuery();
             List<Order> orders = new ArrayList<Order>();
@@ -106,6 +126,7 @@ public class OrderDAO {
             c.close();
             return orders;
         } catch (SQLException e) {
+        	System.out.println(e.getMessage());
             System.out.println("Error in getting user order");
             return null;
         }
