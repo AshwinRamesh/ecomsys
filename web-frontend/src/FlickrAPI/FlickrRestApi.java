@@ -34,7 +34,7 @@ public class FlickrRestApi {
 			
 			return response;
 		}catch (Exception e){
-			System.out.println(e.getMessage());
+			System.out.println(e.toString());
 			return null;
 		}		
 	} 
@@ -52,7 +52,7 @@ public class FlickrRestApi {
 			response = getUrl(callUrlStr);
 			if(response !=null){
 				NodeList nl = response.getElementsByTagName("photo");
-				System.out.println(nl.getLength());
+
 				for (int i = 0; i < nl.getLength(); i ++){
 					NamedNodeMap node = nl.item(i).getAttributes();
 					String tags = "";
@@ -70,7 +70,8 @@ public class FlickrRestApi {
 						photo.setUrlOriginal(node.getNamedItem("url_o").getTextContent());
 					} catch(Exception e) {
 						photo.setUrlOriginal(node.getNamedItem("url_t").getTextContent());
-						System.out.println(e.toString());
+						//System.out.println(e.toString());
+						//System.out.println(e.getMessage());
 					}
 					photo.setUrlThumb(node.getNamedItem("url_t").getTextContent());
 					photo.setPrice(Constants.FIXED_PRICE+((tagsSplit.length) * Constants.PRICE_PER_TAG));
@@ -79,7 +80,7 @@ public class FlickrRestApi {
 			}
 			return photos;
 		}catch (Exception e){
-			System.out.println(e.getMessage());
+			System.out.println(e.toString());
 			return null;
 		}
 	}

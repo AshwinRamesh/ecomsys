@@ -1,6 +1,5 @@
 function setXMLHttpRequest(url,resultContent)
 {
-	alert(url);
   try
   {
 	if (window.XMLHttpRequest)
@@ -19,7 +18,8 @@ function setXMLHttpRequest(url,resultContent)
     {
       if ( xmlhttp.readyState == 4 && xmlhttp.status == 200 )
       {
-        document.getElementById( resultContent ).innerHTML = xmlhttp.responseText;
+    	if(resultContent != "")  
+    		document.getElementById( resultContent ).innerHTML = xmlhttp.responseText;
         // places text in contentArea
       }
       // end if

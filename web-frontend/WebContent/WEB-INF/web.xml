@@ -30,5 +30,15 @@
   <servlet-mapping>
     <servlet-name>SearchResult</servlet-name>
     <url-pattern>/SearchResult</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>ShoppingCart</servlet-name>
+    <servlet-class>products.ShoppingCart</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShoppingCart</servlet-name>
+    <url-pattern>/ShoppingCart</url-pattern>
   </servlet-mapping>  
+  
 </web-app>
