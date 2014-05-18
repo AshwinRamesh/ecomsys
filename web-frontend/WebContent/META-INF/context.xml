@@ -7,7 +7,7 @@
               maxIdle="2"
               maxWait="5000"
               validationQuery="SELECT * FROM orders limit 1"
-              url="jdbc:mysql://localhost:3306/comp5347shops_development"
+              url="jdbc:mysql://localhost:3306/ecomsys"
               maxActive="4"
               poolPreparedStatements="true"
               />
