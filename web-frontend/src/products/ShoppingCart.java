@@ -35,17 +35,22 @@ public class ShoppingCart extends HttpServlet {
 		Cart shoppingCart = (Cart)getServletContext().getAttribute("shoppingCart");
 	
 		if(action.equals("addToCart")){
-			shoppingCart.addItem(photoId, photos);
-			getServletContext().setAttribute("shoppingCart", shoppingCart);
+			synchronized(shoppingCart){
+				shoppingCart.addItem(photoId, photos);
+				getServletContext().setAttribute("shoppingCart", shoppingCart);
+			}	
 			response.setStatus(response.SC_OK);
 
 		}else if(action.equals("removeFromCart")){
-				shoppingCart.removeItem(photoId, photos);
+			synchronized(shoppingCart){
+				shoppingCart.removeItem(photoId);
 				getServletContext().setAttribute("shoppingCart", shoppingCart);
 				getServletContext().setAttribute("items", shoppingCart.getItems());
-				RequestDispatcher view = request.getRequestDispatcher("shoppingCart.jsp");
-				view.forward(request,response);			
-				response.setStatus(response.SC_OK);
+			}	
+			
+			RequestDispatcher view = request.getRequestDispatcher("shoppingCart.jsp");
+			view.forward(request,response);			
+				//response.setStatus(response.SC_OK);
 		}else if(action.equals("showCart")){
 			response.setStatus(response.SC_OK);
 			getServletContext().setAttribute("items", shoppingCart.getItems());

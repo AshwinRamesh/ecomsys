@@ -14,8 +14,8 @@
                                 <div class="info">
                                     <div class="row">
                                         <div class="desc col-md-12" style="overflow:hidden;">
-                                            <h5>${photo.photoTitle}</h5>
-                                            <p>${photo.description}</p>
+                                            <h5 style="max-height:45px;">${photo.photoTitle}</h5>
+                                            <p style="max-height:30px;">${photo.description}<c:if test="${empty photo.description }">&nbsp;</c:if></p>
                                         </div>
                                     </div>
                                     <div class="separator clear-left">

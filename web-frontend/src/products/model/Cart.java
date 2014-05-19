@@ -57,11 +57,14 @@ public class Cart {
 			}
 	}
 	
-	public void removeItem(String photoId,List<FlickrPhoto> photos){
-		for(FlickrPhoto fp : photos)
+	public void removeItem(String photoId){
+		FlickrPhoto a = null;
+		for(FlickrPhoto fp : items)
 			if(fp.getPhotoId().equals(photoId)){
-				items.remove(fp);
+				a = fp;
 			}
+		if(a != null) 
+			items.remove(a);
 	}
 
 }
