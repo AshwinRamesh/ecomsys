@@ -1,4 +1,7 @@
 package orders.model;
+import java.util.List;
+
+import orderProducts.model.OrderProduct;;
 
 public class Order {
 
@@ -10,6 +13,7 @@ public class Order {
     private String city;
     private String postCode;
     private Double finalCost;
+    private List<OrderProduct> products;
 
     public Order() {}
 
@@ -86,6 +90,19 @@ public class Order {
 
     public void setFinalCost(Double finalCost) {
         this.finalCost = finalCost;
+    }
+
+    public void setOrderProducts(List<OrderProduct> l) {
+        this.products = l;
+    }
+
+    public List<OrderProduct> getOrderProducts() {
+        return this.products;
+    }
+
+    public void addProduct(OrderProduct op) {
+        op.setOrderId(this.orderId);
+        this.products.add(op);
     }
 
 }
