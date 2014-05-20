@@ -66,5 +66,12 @@ public class Cart {
 		if(a != null) 
 			items.remove(a);
 	}
+	
+	public double getTotal(){
+		double sum = 0;
+		for(FlickrPhoto fp : items)
+			sum += fp.getPrice();	
+		return sum;
+	}
 
 }

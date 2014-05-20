@@ -35,5 +35,12 @@
                                     </button></td>
                                 </tr>
                             </c:forEach>
+                                                            <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><h3>Total</h3></td>
+                                    <td class="text-right"><h3><strong>$${total }</strong></h3></td>
+                                </tr>
         </tbody></table></c:if><c:if test="${len == 0}">Your Shopping cart is Empty.</c:if></div>
         </div>
