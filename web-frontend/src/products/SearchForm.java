@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import orderProducts.dao.OrderProductDAO;
+import orderProducts.model.OrderProduct;
+
 /**
  * @author Mojtaba
  *
@@ -38,7 +41,10 @@ public class SearchForm extends HttpServlet {
 				//List<Order> a = dao.getOrders();
 				Order order = new Order(2, "processing", "3dfgsg", "fdgdfh", "syd", "5462", 33.50);
 				dao.insertOrder(order);
+				OrderProduct p = new OrderProduct("dsgsd34", order.getOrderId(), "TEST", "hello world", 2);
 				System.out.println("HELLO POOP");
+				OrderProductDAO dao2 = new OrderProductDAO();
+				dao2.insertOrderProudct(p);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

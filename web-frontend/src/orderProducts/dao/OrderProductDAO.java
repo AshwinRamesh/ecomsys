@@ -14,7 +14,74 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import orders.model.Order;
+import orderProducts.model.OrderProduct;
 
 public class OrderProductDAO {
+    private DataSource ds;
+    private String createOrderProduct = "INSERT INTO order_products (product_id, product_name, description, quantity, order_id) VALUES (?, ?, ?, ?, ?)";
+    private String getOrderProducts = "SELECT * FROM order_products WHERE order_id = ?";
+
+     public OrderProductDAO() throws Exception{
+        try{
+            Context initCtx = new InitialContext();
+            Context envCtx = (Context) initCtx.lookup("java:comp/env");
+            // Look up our data source
+            ds = (DataSource) envCtx.lookup("jdbc/ShoppingCart");
+        }catch (NamingException e){
+            throw new Exception("cannot find database");
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    public Boolean insertOrderProudct(OrderProduct op) {
+        try {
+            Connection c = ds.getConnection();
+            PreparedStatement ps = c.prepareStatement(createOrderProduct, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, String.valueOf(op.getProductId()));
+            ps.setString(2, op.getProductName());
+            ps.setString(3, op.getDescription());
+            ps.setString(4, String.valueOf(op.getQuantity()));
+            ps.setString(5, String.valueOf(op.getOrderId()));
+
+            int affectedRows = ps.executeUpdate();
+            if (affectedRows != 1) {
+                throw new SQLException("Creating Order Failed");
+            }
+            ps.close();
+            c.close();
+            return true;
+        } catch (SQLException e) {
+        	System.out.println(e.getMessage());
+            System.out.println("Error in creating order product;");
+            return false;
+        }
+    }
+
+    public List<OrderProduct> getOrderProductsForOrder(int orderId) {
+        try{
+            Connection c = ds.getConnection();
+            PreparedStatement ps = c.prepareStatement(getOrderProducts);
+            ps.setString(1, String.valueOf(orderId));
+            ResultSet rs = ps.executeQuery();
+            List<OrderProduct> orderProducts = new ArrayList<OrderProduct>();
+            while(rs.next()) {
+                orderProducts.add(new OrderProduct(
+                    rs.getString("order_id"),
+                    rs.getInt("product_id"),
+                    rs.getString("product_name"),
+                    rs.getString("description"),
+                    rs.getInt("quantity")
+                ));
+            }
+            rs.close();
+            ps.close();
+            c.close();
+            return orderProducts;
+        } catch (SQLException e) {
+            System.out.println("Error in getting user order");
+            return null;
+        }
+    }
 
 }

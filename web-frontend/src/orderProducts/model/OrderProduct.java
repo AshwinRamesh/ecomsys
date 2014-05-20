@@ -2,17 +2,27 @@ package orderProducts.model;
 
 public class OrderProduct {
 
-    private int productId;
+    private String productId;
     private int orderId;
     private String productName;
     private String description;
     private int quantity;
 
-    public int getProductId() {
+    public OrderProduct() {}
+
+    public OrderProduct(String productId, int orderId, String productName, String description, int quantity) {
+        this.setOrderId(orderId);
+        this.setProductId(productId);
+        this.setProductName(productName);
+        this.setDescription(description);
+        this.setQuantity(quantity);
+    }
+
+    public String getProductId() {
         return productId;
     }
 
-    public void setProductId(int productId) {
+    public void setProductId(String productId) {
         this.productId = productId;
     }
 
