@@ -46,6 +46,7 @@ public class ShoppingCart extends HttpServlet {
 				shoppingCart.removeItem(photoId);
 				getServletContext().setAttribute("shoppingCart", shoppingCart);
 				getServletContext().setAttribute("items", shoppingCart.getItems());
+				getServletContext().setAttribute("total", shoppingCart.getTotal());
 			}	
 			
 			RequestDispatcher view = request.getRequestDispatcher("shoppingCart.jsp");
@@ -55,6 +56,7 @@ public class ShoppingCart extends HttpServlet {
 			response.setStatus(response.SC_OK);
 			getServletContext().setAttribute("items", shoppingCart.getItems());
 			RequestDispatcher view = request.getRequestDispatcher("shoppingCart.jsp");
+			getServletContext().setAttribute("total", shoppingCart.getTotal());
 			view.forward(request,response);			
 		}else{
 			response.sendError(response.SC_NOT_FOUND,"Action Not Found");
