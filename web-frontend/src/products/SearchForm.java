@@ -46,6 +46,15 @@ public class SearchForm extends HttpServlet {
 		RequestDispatcher view = request.getRequestDispatcher("search.html");
 		view.forward(request,response);
 	}
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// expire session
+		HttpSession session = request.getSession();
+		session.invalidate();
+		
+		// redirect to SearchForm
+		response.sendRedirect("logout.html");
+	}
 
 
 }

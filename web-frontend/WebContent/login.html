@@ -13,14 +13,14 @@
             <div class="panel panel-default">
                 <div class="panel-heading"><h3 class="panel-title"><strong>Sign in </strong></h3></div>
                 <div class="panel-body">
-                    <form role="form">
+                    <form role="login" method="POST" action="j_security_check">
                         <div class="form-group">
                             <label>Username </label>
-                            <input type="email" class="form-control" style="border-radius:0px" id="exampleInputEmail1" placeholder="john.smith">
+                            <input type="text" class="form-control" style="border-radius:0px" name="j_username" id="username" placeholder="john.smith">
                         </div>
                         <div class="form-group">
                             <label>Password </label>
-                            <input type="password" class="form-control" style="border-radius:0px" id="exampleInputPassword1" placeholder="password">
+                            <input type="password" class="form-control" style="border-radius:0px" name="j_password" id="password" placeholder="password">
                         </div>
                         <button type="submit" class="btn btn-sm btn-default">Sign in</button>
                     </form>

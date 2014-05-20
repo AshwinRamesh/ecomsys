@@ -14,10 +14,9 @@ CREATE TABLE users (
 );
 
 CREATE TABLE user_roles (
-    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
-    role VARCHAR(10) DEFAULT 'user',
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    user_name VARCHAR(30) NOT NULL,
+    user_role VARCHAR(10) DEFAULT 'user',
+    primary key (user_name, user_role)
 );
 
 /* Orders table */
@@ -46,8 +45,8 @@ CREATE TABLE order_products (
 );
 
 INSERT INTO users (username, password) VALUES ("userA", "passwordA");
-INSERT INTO user_roles(user_id, role) VALUES (1, "user");
+INSERT INTO user_roles(user_name, user_role) VALUES ("userA", "user");
 INSERT INTO users (username, password) VALUES ("userB", "passwordB");
-INSERT INTO user_roles(user_id, role) VALUES (2, "user");
+INSERT INTO user_roles(user_name, user_role) VALUES ("userB", "user");
 INSERT INTO users (username, password) VALUES ("admin", "admin");
-INSERT INTO user_roles(user_id, role) VALUES (3, "admin");
+INSERT INTO user_roles(user_name, user_role) VALUES ("admin", "admin");

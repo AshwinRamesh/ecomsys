@@ -1,14 +1,22 @@
 <Context path="/shoppingCart">
-    <Resource name="jdbc/ShoppingCart"
-              type="javax.sql.DataSource"
-              username="root"
-              password="password"
-              driverClassName="com.mysql.jdbc.Driver"
-              maxIdle="2"
-              maxWait="5000"
-              validationQuery="SELECT * FROM orders limit 1"
-              url="jdbc:mysql://localhost:3306/ecomsys"
-              maxActive="4"
-              poolPreparedStatements="true"
-              />
-</Context>
+  <Resource name="jdbc/ShoppingCart"
+    type="javax.sql.DataSource"
+    username="root"
+    password="password"
+    driverClassName="com.mysql.jdbc.Driver"
+    maxIdle="2"
+    maxWait="5000"
+    validationQuery="SELECT * FROM users"
+    url="jdbc:mysql://localhost:3306/ecomsys"
+    maxActive="4"
+    poolPreparedStatements="true"
+    />
+    <Realm className="org.apache.catalina.realm.DataSourceRealm"
+     localDataSource="true"
+     dataSourceName="jdbc/ShoppingCart"
+     userTable="users" userNameCol="username"
+     userCredCol="password"
+     userRoleTable="user_roles" roleNameCol="user_role"
+     />
+
+   </Context>
