@@ -1,4 +1,7 @@
 import java.io.IOException;
+import java.io.PrintWriter;
+
+
 
 // import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -7,6 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Servlet implementation class Shipping
@@ -27,6 +33,14 @@ public class Shipping extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// not needed
+    	
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// receive params (city name, number of items) -- in this format?
 		String city = request.getParameter("city");
 		int quantity = Integer.parseInt(request.getParameter("quantity"));
@@ -43,23 +57,43 @@ public class Shipping extends HttpServlet {
     			break;
     		}
     	}
+    	/** return error if not found */
+    	if(pos == 0){
+    		String result = "Error";
+    		// convert to JSON
+    		JSONObject resultObj = new JSONObject();
+    		try {
+				resultObj.put("shipping", result);
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+    		// set content type for response
+        	response.setContentType("application/json");
+        	// Return with a printwriter
+        	PrintWriter out = response.getWriter();
+        	out.print(result);
+        	out.flush();
+    	}
+    	/** Otherwise, calculate shippping price and return */
     	// get corresponding price from priceList and convert
     	String shippingPriceString = priceList[pos];
     	int shippingPriceVal = Integer.parseInt(shippingPriceString);
 		// multiply price by number of items
     	int result = quantity*shippingPriceVal;
-		// return this price -- what format do we want this in? We should probably leave
-    	// it in the user's session data when it gets back to the main tomcat server
-    	HttpSession session = request.getSession();
-    	session.setAttribute("somevariable", result);
+		// convert to JSON
+		JSONObject resultObj = new JSONObject();
+		try {
+			resultObj.put("shipping", result);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		// set content type for response
+    	response.setContentType("application/json");
+    	// Return with a printwriter
+    	PrintWriter out = response.getWriter();
+    	out.print(result);
+    	out.flush();
     	
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// not needed
 	}
 
 }
