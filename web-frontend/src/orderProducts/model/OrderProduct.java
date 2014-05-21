@@ -7,15 +7,17 @@ public class OrderProduct {
     private String productName;
     private String description;
     private int quantity;
+    private double cost;
 
     public OrderProduct() {}
 
-    public OrderProduct(String productId, int orderId, String productName, String description, int quantity) {
+    public OrderProduct(String productId, int orderId, String productName, String description, int quantity, double cost) {
         this.setOrderId(orderId);
         this.setProductId(productId);
         this.setProductName(productName);
         this.setDescription(description);
         this.setQuantity(quantity);
+        this.setCost(cost);
     }
 
     public String getProductId() {
@@ -57,5 +59,13 @@ public class OrderProduct {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
+	public double getCost() {
+		return cost;
+	}
+
+	public void setCost(double cost) {
+		this.cost = cost;
+	}
 
 }

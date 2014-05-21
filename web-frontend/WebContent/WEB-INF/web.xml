@@ -8,14 +8,37 @@
     <servlet>
     <servlet-name>SearchForm</servlet-name>
     <servlet-class>products.SearchForm</servlet-class>
-    <init-param>
-      <param-name>products</param-name>
-      <param-value>iphone6, Samsung Galaxy 4, Nokia Lumia 1020</param-value>
-    </init-param>
   </servlet>
   <servlet-mapping>
     <servlet-name>SearchForm</servlet-name>
     <url-pattern>/SearchForm</url-pattern>
+  </servlet-mapping>
+
+    <servlet>
+    <servlet-name>MyOrders</servlet-name>
+    <servlet-class>orders.MyOrders</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MyOrders</servlet-name>
+    <url-pattern>/MyOrders</url-pattern>
+  </servlet-mapping>
+
+    <servlet>
+    <servlet-name>AllOrders</servlet-name>
+    <servlet-class>orders.AllOrders</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AllOrders</servlet-name>
+    <url-pattern>/AllOrders</url-pattern>
+  </servlet-mapping>
+
+    <servlet>
+    <servlet-name>UpdateOrder</servlet-name>
+    <servlet-class>orders.UpdateOrder</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateOrder</servlet-name>
+    <url-pattern>/UpdateOrder</url-pattern>
   </servlet-mapping>
 
     <servlet>
@@ -40,6 +63,11 @@
     <res-type>javax.sql.DataSource</res-type>
     <res-auth>Container</res-auth>
   </resource-ref>
+<error-page>
+    <!-- Forbidden directory listing -->
+    <error-code>403</error-code>
+    <location>/index-403.html</location>
+</error-page>
   <login-config>
    <auth-method>FORM</auth-method>
    <form-login-config>
@@ -53,6 +81,8 @@
      <url-pattern>/SearchForm</url-pattern>
      <url-pattern>/SearchResult</url-pattern>
      <url-pattern>/ShoppingCart</url-pattern>
+     <url-pattern>/SubmitOrders</url-pattern>
+     <url-pattern>/MyOrders</url-pattern>
      <http-method>GET</http-method>
      <http-method>POST</http-method>
    </web-resource-collection>
@@ -63,8 +93,8 @@
  <security-constraint>
    <web-resource-collection>
      <web-resource-name>protected</web-resource-name>
-     <url-pattern>/Admin/Orders</url-pattern>
-     <url-pattern>/Admin/UpdateOrder</url-pattern>
+     <url-pattern>/AllOrders</url-pattern>
+     <url-pattern>/UpdateOrder</url-pattern>
      <http-method>GET</http-method>
      <http-method>POST</http-method>
    </web-resource-collection>

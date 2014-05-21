@@ -1,4 +1,5 @@
 package orders.model;
+import java.util.ArrayList;
 import java.util.List;
 
 import orderProducts.model.OrderProduct;;
@@ -13,19 +14,22 @@ public class Order {
     private String city;
     private String postCode;
     private Double finalCost;
+    private Double shipCost;
+    private Double cost;
     private List<OrderProduct> products;
 
     public Order() {}
 
-    public Order(int userId, String status, String ship1, String ship2, String city, String postcode, Double cost) {
+    public Order(int userId, String status, String ship1, String ship2, String city, String postcode, Double cost, Double shipCost, Double finalCost) {
         this.setUserId(userId);
         this.setStatus(status);
         this.setShippingAddress1(ship1);
         this.setShippingAddress2(ship2);
         this.setCity(city);
         this.setPostCode(postcode);
-        this.setFinalCost(cost);
-
+        this.setCost(cost);
+        this.setShipCost(shipCost);
+        this.setFinalCost(finalCost);
     }
 
     public void setOrderId(int orderId) {
@@ -92,11 +96,11 @@ public class Order {
         this.finalCost = finalCost;
     }
 
-    public void setOrderProducts(List<OrderProduct> l) {
+    public void setProducts(List<OrderProduct> l) {
         this.products = l;
     }
 
-    public List<OrderProduct> getOrderProducts() {
+    public List<OrderProduct> getProducts() {
         return this.products;
     }
 
@@ -104,5 +108,21 @@ public class Order {
         op.setOrderId(this.orderId);
         this.products.add(op);
     }
+
+	public Double getShipCost() {
+		return shipCost;
+	}
+
+	public void setShipCost(Double shipCost) {
+		this.shipCost = shipCost;
+	}
+
+	public Double getCost() {
+		return cost;
+	}
+
+	public void setCost(Double cost) {
+		this.cost = cost;
+	}
 
 }

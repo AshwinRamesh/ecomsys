@@ -51,7 +51,7 @@ public class SearchForm extends HttpServlet {
 		// expire session
 		HttpSession session = request.getSession();
 		session.invalidate();
-		
+		// TODO - empty the servlet context
 		// redirect to SearchForm
 		response.sendRedirect("logout.html");
 	}

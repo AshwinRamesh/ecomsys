@@ -18,9 +18,9 @@ import orders.model.Order;
 
 public class OrderDAO {
     private DataSource ds;
-    private String getOrdersByUser = "SELECT * FROM orders WHERE user_id = ?";
+    private String getOrdersByUser = "SELECT * FROM orders WHERE user_id = (SELECT id FROM users WHERE username = ?)";
     private String getAllOrders = "SELECT * FROM orders";
-    private String createOrder = "INSERT into orders (user_id, status, shipping_address_1, shipping_address_2, city, postcode, final_cost) VALUES (?,?,?,?,?,?,?)";
+    private String createOrder = "INSERT into orders (user_id, status, shipping_address_1, shipping_address_2, city, postcode, final_cost, ship_cost, product_cost) VALUES (?,?,?,?,?,?,?,?,?)";
     private String updateOrderStatus = "UPDATE orders SET status = ? WHERE id = ?";
 
     public OrderDAO() throws Exception{
@@ -47,6 +47,9 @@ public class OrderDAO {
             ps.setString(5, o.getCity());
             ps.setString(6, o.getPostCode());
             ps.setString(7, String.valueOf(o.getFinalCost()));
+            ps.setString(8, String.valueOf(o.getShipCost()));
+            ps.setString(9, String.valueOf(o.getCost()));
+            
 
             int affectedRows = ps.executeUpdate();
             if (affectedRows != 1) {
@@ -68,58 +71,25 @@ public class OrderDAO {
         }
     }
 
-    public List<Order> getUserOrders(int userId) {
+    public List<Order> getUserOrders(String username) {
         try{
             Connection c = ds.getConnection();
             PreparedStatement ps = c.prepareStatement(getOrdersByUser);
-            ps.setString(1, String.valueOf(userId));
+            ps.setString(1, username);
             ResultSet rs = ps.executeQuery();
             List<Order> orders = new ArrayList<Order>();
             while(rs.next()) {
-                orders.add(new Order(
-                    rs.getInt("user_id"),
-                    rs.getString("status"),
-                    rs.getString("shipping_address_1"),
-                    rs.getString("shipping_address_2"),
-                    rs.getString("city"),
-                    rs.getString("postcode"),
-                    rs.getDouble("final_cost")
-                ));
-            }
-            rs.close();
-            ps.close();
-            c.close();
-            return orders;
-        } catch (SQLException e) {
-            System.out.println("Error in getting user order");
-            return null;
-        }
-    }
-
-    public List<Order> getOrders() {
-        try{
-        	System.out.println("worky");
-        	try {
-				Class.forName("com.mysql.jdbc.Driver");
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-        	Connection c = DriverManager.getConnection("jdbc:mysql://localhost:3306/ecomsys", "root", "password");
-        	System.out.println("worky");
-            PreparedStatement ps = c.prepareStatement(getAllOrders);
-            ResultSet rs = ps.executeQuery();
-            List<Order> orders = new ArrayList<Order>();
-            while(rs.next()) {
-                orders.add(new Order(
-                    rs.getInt("user_id"),
-                    rs.getString("status"),
-                    rs.getString("shipping_address_1"),
-                    rs.getString("shipping_address_2"),
-                    rs.getString("city"),
-                    rs.getString("postcode"),
-                    rs.getDouble("final_cost")
-                ));
+            	Order o = new Order(rs.getInt("user_id"),
+                        rs.getString("status"),
+                        rs.getString("shipping_address_1"),
+                        rs.getString("shipping_address_2"),
+                        rs.getString("city"),
+                        rs.getString("postcode"),
+                        rs.getDouble("product_cost"),
+            			rs.getDouble("ship_cost"),
+            			rs.getDouble("final_cost"));
+                	o.setOrderId(rs.getInt("id"));
+                    orders.add(o);
             }
             rs.close();
             ps.close();
@@ -132,12 +102,48 @@ public class OrderDAO {
         }
     }
 
-    public Boolean updateStatusOrder(Order o) {
+    public List<Order> getOrders() {
+        try{
+        	try {
+				Class.forName("com.mysql.jdbc.Driver");
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        	Connection c = DriverManager.getConnection("jdbc:mysql://localhost:3306/ecomsys", "root", "password");
+            PreparedStatement ps = c.prepareStatement(getAllOrders);
+            ResultSet rs = ps.executeQuery();
+            List<Order> orders = new ArrayList<Order>();
+            while(rs.next()) {
+            	Order o = new Order(rs.getInt("user_id"),
+                        rs.getString("status"),
+                        rs.getString("shipping_address_1"),
+                        rs.getString("shipping_address_2"),
+                        rs.getString("city"),
+                        rs.getString("postcode"),
+                        rs.getDouble("product_cost"),
+            			rs.getDouble("ship_cost"),
+            			rs.getDouble("final_cost"));
+                	o.setOrderId(rs.getInt("id"));
+                    orders.add(o);
+            }
+            rs.close();
+            ps.close();
+            c.close();
+            return orders;
+        } catch (SQLException e) {
+        	System.out.println(e.getMessage());
+            System.out.println("Error in getting user order");
+            return null;
+        }
+    }
+
+    public Boolean updateStatusOrder(int orderId, String status) {
         try{
             Connection c = ds.getConnection();
             PreparedStatement ps = c.prepareStatement(updateOrderStatus);
-            ps.setString(1, o.getStatus());
-            ps.setString(2, String.valueOf(o.getOrderId()));
+            ps.setString(1, status);
+            ps.setString(2, String.valueOf(orderId));
             ps.executeUpdate();
             ps.close();
             c.close();

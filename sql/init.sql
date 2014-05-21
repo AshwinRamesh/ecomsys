@@ -6,43 +6,51 @@ DROP TABLE if EXISTS `user_roles`;
 DROP TABLE if EXISTS `orders`;
 DROP TABLE if EXISTS `order_products`;
 
-/* User table */
-CREATE TABLE users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(30) NOT NULL, -- ensure unique
-    password VARCHAR(30) NOT NULL
-);
+-- Create syntax for TABLE 'order_products'
+CREATE TABLE `order_products` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `product_id` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `product_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `description` mediumtext COLLATE utf8_unicode_ci NOT NULL,
+  `quantity` int(4) DEFAULT '1',
+  `order_id` int(11) NOT NULL,
+  `cost` decimal(9,2) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `order_id` (`order_id`),
+  CONSTRAINT `order_products_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-CREATE TABLE user_roles (
-    user_name VARCHAR(30) NOT NULL,
-    user_role VARCHAR(10) DEFAULT 'user',
-    primary key (user_name, user_role)
-);
+-- Create syntax for TABLE 'orders'
+CREATE TABLE `orders` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `status` enum('processing','shipping','delivered') COLLATE utf8_unicode_ci DEFAULT 'processing',
+  `shipping_address_1` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `shipping_address_2` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `city` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `postcode` int(4) DEFAULT NULL,
+  `final_cost` decimal(9,2) DEFAULT NULL,
+  `ship_cost` decimal(9,2) DEFAULT NULL,
+  `product_cost` decimal(9,2) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-/* Orders table */
-CREATE TABLE orders (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT(11) NOT NULL, -- make this a foreign key
-    status ENUM('processing', 'shipping', 'delivered') DEFAULT 'processing',
-    shipping_address_1 VARCHAR(255),
-    shipping_address_2 VARCHAR(255),
-    city VARCHAR(255) NOT NULL,
-    postcode INT(4),
-    final_cost DECIMAL(9,2) DEFAULT NULL, /* Only set once shipping */
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-);
+-- Create syntax for TABLE 'user_roles'
+CREATE TABLE `user_roles` (
+  `username` varchar(30) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `user_role` varchar(10) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'user',
+  PRIMARY KEY (`username`,`user_role`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
-/* Table that stores all products in each order */
-CREATE TABLE order_products (
-    id INT(11) AUTO_INCREMENT PRIMARY KEY,
-    product_id INT(11) NOT NULL,
-    product_name VARCHAR(255) NOT NULL,
-    description MEDIUMTEXT NOT NULL,
-    quantity INT(4) DEFAULT 1,
-    order_id INT NOT NULL,
-    FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE
-);
+-- Create syntax for TABLE 'users'
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO users (username, password) VALUES ("userA", "passwordA");
 INSERT INTO user_roles(user_name, user_role) VALUES ("userA", "user");

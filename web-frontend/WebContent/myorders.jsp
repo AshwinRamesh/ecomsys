@@ -1,3 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,14 +27,6 @@
   <!-- Collect the nav links, forms, and other content for toggling -->
   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <div class="col-sm-3 col-md-3">
-        <form name="searchForm" class="navbar-form" role="search" method="GET" action="SearchResult" onsubmit="return false;">
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search" name="q">
-            <div class="input-group-btn">
-                <button class="btn btn-default" type="button" onclick="submitSearchForm(document.forms['searchForm']);"><i class="glyphicon glyphicon-search"></i></button>
-            </div>
-        </div>
-        </form>
     </div>
     <ul class="nav navbar-nav navbar-right">
       <li><a class="fa fa-shopping-cart" data-toggle="modal" data-target="#cartModal" href="#" onclick="setXMLHttpRequest('ShoppingCart?action=showCart','cartBody');"> Cart</a></li>
@@ -46,6 +43,50 @@
   </div><!-- /.navbar-collapse -->
 </nav>
     <div class="container" style="margin-top:30px" id="container">
+<div class="panel-group" id="accordion">
+	<c:forEach items="${orders}" var="order">
+			<div class="panel panel-default">
+	    <div class="panel-heading">
+	      <h4 class="panel-title">
+	        <a data-toggle="collapse" data-parent="#accordion" href="#collapse${order.orderId}">Order No. <span>${order.orderId}</span></a>
+	      </h4>
+	    </div>
+	    <div id="collapse${order.orderId}" class="panel-collapse collapse">
+	      <div class="panel-body">
+	        <div class="row checkout-items">
+	        <div class="col-md-8  col-md-offset-2">
+	            <table class="table table-striped">
+	              <thead>
+	                <tr>
+	                  <th>Product ID</th>
+	                  <th>Product Name</th>
+	                  <th>Product Description</th>
+	                  <th>Quantity</th>
+	                  <th>Cost</th>
+	                </tr>
+	              </thead>
+	              <tbody>
+	              	<c:forEach var="product" items="${order.products}">
+		              	<tr>
+		                  <td>${product.productId}</td>
+		                  <td>${product.productName}</td>
+		                  <td>${product.description}</td>
+		                  <td>${product.quantity}</td>
+		                  <td>${product.cost}</td>
+		                </tr>
+	              	</c:forEach>
+	              </tbody>
+	            </table>
+				<h4 class="checkout-total">Sub Total: $<span>${order.cost}</span></h4>
+				<h4 class="checkout-total">Shipping: $<span>${order.shipCost}</span></h4>
+	            <h4 class="checkout-total">Total: $<span>${order.finalCost}</span></h4>
+	            <h4 class="checkout-total">Status: <span>${order.status}</span></h4>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+	  </div>
+	</c:forEach>
 
 	</div>
     <div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="width:auto;">

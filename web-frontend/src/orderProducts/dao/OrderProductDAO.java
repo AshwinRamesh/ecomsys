@@ -18,7 +18,7 @@ import orderProducts.model.OrderProduct;
 
 public class OrderProductDAO {
     private DataSource ds;
-    private String createOrderProduct = "INSERT INTO order_products (product_id, product_name, description, quantity, order_id) VALUES (?, ?, ?, ?, ?)";
+    private String createOrderProduct = "INSERT INTO order_products (product_id, product_name, description, quantity, order_id, cost) VALUES (?, ?, ?, ?, ?, ?)";
     private String getOrderProducts = "SELECT * FROM order_products WHERE order_id = ?";
 
      public OrderProductDAO() throws Exception{
@@ -43,6 +43,7 @@ public class OrderProductDAO {
             ps.setString(3, op.getDescription());
             ps.setString(4, String.valueOf(op.getQuantity()));
             ps.setString(5, String.valueOf(op.getOrderId()));
+            ps.setString(6, String.valueOf(op.getCost()));
 
             int affectedRows = ps.executeUpdate();
             if (affectedRows != 1) {
@@ -67,11 +68,12 @@ public class OrderProductDAO {
             List<OrderProduct> orderProducts = new ArrayList<OrderProduct>();
             while(rs.next()) {
                 orderProducts.add(new OrderProduct(
-                    rs.getString("order_id"),
-                    rs.getInt("product_id"),
+                    rs.getString("product_id"),
+                    rs.getInt("order_id"),
                     rs.getString("product_name"),
                     rs.getString("description"),
-                    rs.getInt("quantity")
+                    rs.getInt("quantity"),
+                    rs.getDouble("cost")
                 ));
             }
             rs.close();
@@ -79,7 +81,8 @@ public class OrderProductDAO {
             c.close();
             return orderProducts;
         } catch (SQLException e) {
-            System.out.println("Error in getting user order");
+            System.out.println(e.getMessage());
+            System.out.println("Error in getting user order products");
             return null;
         }
     }
