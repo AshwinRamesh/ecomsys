@@ -13,8 +13,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import orders.model.Order;  // TODO - fix
-import orderProducts.model.OrderProduct; // TODO - fix
+import models.orders.*;
 
 public class OrderProductDAO {
     private DataSource ds;

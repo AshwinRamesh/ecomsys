@@ -1,6 +1,6 @@
 
 
-package orders;
+package controllers.orders;
 
 import java.io.IOException;
 import java.util.Enumeration;
@@ -13,9 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import orderProducts.dao.OrderProductDAO;
-import orders.dao.OrderDAO;
-import orders.model.Order;
+import models.orders.*;
+import models.orderProducts.*;
 
 public class AllOrders extends HttpServlet {
     private static final long serialVersionUID = 1L;

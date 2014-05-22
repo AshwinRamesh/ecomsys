@@ -1,8 +1,8 @@
-package orders.model;
+package models.orders;
 import java.util.ArrayList;
 import java.util.List;
 
-import orderProducts.model.OrderProduct;;
+import models.orderProducts.OrderProduct;
 
 public class Order {
 

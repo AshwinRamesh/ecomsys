@@ -2,7 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-    
+
 
                     <div class="row">
                     <c:forEach items="${photos}" var="photo">
@@ -20,7 +20,7 @@
                                     </div>
                                     <div class="separator clear-left">
                                         <p class="btn-add">
-                                            <i class="fa fa-shopping-cart"></i><a href="http://www.jquery2dotnet.com" class="hidden-sm" onclick="setXMLHttpRequest('ShoppingCart?action=addToCart&photoId='+${photo.photoId},'');return false; ">Add to cart</a>
+                                            <i class="fa fa-shopping-cart"></i><a href="#" class="hidden-sm" onclick="setXMLHttpRequest('ShoppingCart?action=addToCart&photoId='+${photo.photoId},'');return false; ">Add to cart</a>
                                         </p>
                                         <p class="btn-details">$${photo.price}</p>
                                     </div>
@@ -29,5 +29,5 @@
                                 </div>
                             </div>
                         </div>
-                     </c:forEach>   
+                     </c:forEach>
                      </div>

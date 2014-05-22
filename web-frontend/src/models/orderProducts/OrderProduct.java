@@ -1,4 +1,4 @@
-package models.OrderProducts;
+package models.orderProducts;
 
 public class OrderProduct {
 

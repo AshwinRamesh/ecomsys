@@ -1,4 +1,4 @@
-package orders.dao;
+package models.orders;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,7 +14,6 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import orders.model.Order;
 
 public class OrderDAO {
     private DataSource ds;

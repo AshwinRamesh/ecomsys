@@ -8,7 +8,7 @@
 
   <servlet>
     <servlet-name>MyOrders</servlet-name>
-    <servlet-class>orders.MyOrders</servlet-class>
+    <servlet-class>controllers.orders.MyOrders</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>MyOrders</servlet-name>
@@ -17,7 +17,7 @@
 
   <servlet>
     <servlet-name>AllOrders</servlet-name>
-    <servlet-class>orders.AllOrders</servlet-class>
+    <servlet-class>controllers.orders.AllOrders</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>AllOrders</servlet-name>
@@ -26,7 +26,7 @@
 
   <servlet>
     <servlet-name>Checkout</servlet-name>
-    <servlet-class>orders.Checkout</servlet-class>
+    <servlet-class>controllers.orders.Checkout</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Checkout</servlet-name>
@@ -35,7 +35,7 @@
 
   <servlet>
     <servlet-name>UpdateOrder</servlet-name>
-    <servlet-class>orders.UpdateOrder</servlet-class>
+    <servlet-class>controllers.orders.UpdateOrder</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>UpdateOrder</servlet-name>

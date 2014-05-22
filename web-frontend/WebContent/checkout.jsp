@@ -7,6 +7,35 @@
     <link href="css/main.css" rel="stylesheet">
 </head>
 <body>
+<nav class="navbar navbar-default" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="#">Flickr E-commerce System</a>
+  </div>
+
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <div class="col-sm-3 col-md-3">
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">User<b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><a href="MyOrders">My Orders</a></li>
+          <li><form action="Logout" method="post" accept-charset="utf-8">
+            <button type="submit" class="btn btn-sm btn-default">Logout</button>
+          </form></li>
+        </ul>
+      </li>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</nav>
 <div class="container">
     <div class="row checkout-items">
         <div class="col-md-7">
@@ -43,34 +72,34 @@
             </table>
 
             <h4 class="checkout-total">Sub Total: $50.00</h4>
-            <h4 class="checkout-total">Shipping: $5.00</h4>
-            <h4 class="checkout-total">Total: $55.00</h4>
+            <h4 id="shipCost" class="checkout-total">Shipping:</h4>
+            <h4 id="finalCost" class="checkout-total">Total:</h4>
         </div>
         <div class="col-md-4">
             <h2>Address</h2>
-            <form class="form-horizontal" role="form">
+            <form class="form-horizontal" role="form" action="Checkout">
               <div class="form-group">
                 <label for="address1" class="col-sm-3 control-label">Address 1</label>
                 <div class="col-sm-10 col-md-8">
-                  <input class="form-control" id="checkout-address-1" placeholder="5 John St">
+                  <input class="form-control" name="add1" id="checkout-address-1" placeholder="5 John St">
                 </div>
               </div>
               <div class="form-group">
                 <label for="address1" class="col-sm-3 control-label">Address 2</label>
                 <div class="col-sm-10 col-md-8">
-                  <input class="form-control" id="checkout-address-1" placeholder="Inner Newcastle">
+                  <input class="form-control" name="add2" id="checkout-address-1" placeholder="Inner Newcastle">
                 </div>
               </div>
               <div class="form-group">
                 <label for="address1" class="col-sm-3 control-label">City</label>
                 <div class="col-sm-8 col-md-4">
-                  <input class="form-control" id="checkout-address-1" placeholder="Newcastle">
+                  <input class="form-control" name="city" id="checkout-address-1" placeholder="Newcastle">
                 </div>
               </div>
               <div class="form-group">
                 <label for="address1" class="col-sm-3 control-label">Postcode</label>
                 <div class="col-sm-4 col-md-3">
-                  <input class="form-control" id="checkout-address-1" placeholder="2204">
+                  <input class="form-control" name="postcode" id="checkout-address-1" placeholder="2204">
                 </div>
               </div>
 
@@ -85,7 +114,7 @@
 </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="js/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
 </body>
