@@ -28,14 +28,16 @@ public class Logout extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-
+		
 		response.setHeader("Cache-Control", "no-cache, no-store");
 		response.setHeader("Pragma", "no-cache");
 		HttpSession session = request.getSession();
-		Cart shoppingCart = (Cart)session.getAttribute("shoppingCart");
-		shoppingCart.emptyCart();
+		try {
+			Cart shoppingCart = (Cart)session.getAttribute("shoppingCart");
+			shoppingCart.emptyCart();	
+		} catch(Exception e) {}
 
 		request.getSession().invalidate();
-		response.sendRedirect(request.getContextPath() + "/SearchForm");
+		response.sendRedirect(request.getContextPath() + "/");
 	}
 }

@@ -34,7 +34,7 @@
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">User<b class="caret"></b></a>
         <ul class="dropdown-menu">
-          <li><form action="AllOrders" method="post" accept-charset="utf-8">
+          <li><form action="Logout" method="post" accept-charset="utf-8">
             <button type="submit" class="btn btn-sm btn-default">Logout</button>
           </form></li>
         </ul>
