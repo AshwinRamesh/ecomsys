@@ -42,5 +42,5 @@
                                     <td><h3>Total</h3></td>
                                     <td class="text-right"><h3><strong>$${total }</strong></h3></td>
                                 </tr>
-        </tbody></table></c:if><c:if test="${len == 0}">Your Shopping cart is Empty.</c:if></div>
+        </tbody></table><a href="Checkout" class="btn btn-success">Checkout <span class="glyphicon glyphicon-play"></span></a></c:if><c:if test="${len == 0}">Your Shopping cart is Empty.</c:if></div>
         </div>

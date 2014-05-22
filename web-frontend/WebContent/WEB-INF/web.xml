@@ -25,6 +25,15 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>Checkout</servlet-name>
+    <servlet-class>orders.Checkout</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Checkout</servlet-name>
+    <url-pattern>/Checkout</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>UpdateOrder</servlet-name>
     <servlet-class>orders.UpdateOrder</servlet-class>
   </servlet>
@@ -94,6 +103,7 @@
       <url-pattern>/SearchResult</url-pattern>
       <url-pattern>/MyOrders</url-pattern>
       <url-pattern>/ShoppingCart</url-pattern>
+      <url-pattern>/Checkout</url-pattern>
       <http-method>GET</http-method>
       <http-method>POST</http-method>
     </web-resource-collection>
