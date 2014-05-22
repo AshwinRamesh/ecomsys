@@ -1,4 +1,4 @@
-package products.model;
+package models.products;
 
 public class FlickrPhoto {
 	private String photoId;

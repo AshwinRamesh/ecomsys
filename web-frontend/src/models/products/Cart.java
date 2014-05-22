@@ -1,7 +1,7 @@
 /**
  * 
  */
-package products.model;
+package models.products;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -6,11 +6,11 @@ import java.net.*;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import models.products.FlickrPhoto;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.NodeList;
-
-import products.model.FlickrPhoto;
 
 import java.util.*;
 
