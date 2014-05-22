@@ -36,7 +36,7 @@ public class indexPage extends HttpServlet {
 		}else if(remoteUser.equals("admin")){
 			response.sendRedirect("AllOrders");
 		}else{
-			response.sendRedirect(request.getContextPath() + "/SearchForm");
+			response.sendRedirect("SearchForm");
 		}
 		
 	}
