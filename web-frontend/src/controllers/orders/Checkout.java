@@ -3,6 +3,8 @@
 package controllers.orders;
 import models.orders.*;
 import models.orderProducts.*;
+import models.products.Cart;
+import models.products.FlickrPhoto;
 
 import java.io.IOException;
 import java.util.Enumeration;
@@ -20,22 +22,19 @@ public class Checkout extends HttpServlet {
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Show order form
-        // Get user
         HttpSession session = request.getSession();
-        // Get all user's orders
-        try {
-           
-        } catch (Exception e) {
-
-        }
-        // Send request
+        Cart shoppingCart = (Cart)session.getAttribute("shoppingCart");
+		session.setAttribute("items", shoppingCart.getItems());
+		session.setAttribute("total", shoppingCart.getTotal());
         RequestDispatcher view = request.getRequestDispatcher("checkout.jsp");
         view.forward(request,response);
     }
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Try place order
+		// sent REST request to check if city exists
+		// if true: create order, create products, return details
+		// if false: return fail json
 	}
 
 }
