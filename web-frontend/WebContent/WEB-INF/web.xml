@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
   <display-name>EcommerceSystem</display-name>
+
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
   </welcome-file-list>
+
   <servlet>
     <servlet-name>MyOrders</servlet-name>
     <servlet-class>orders.MyOrders</servlet-class>
@@ -12,6 +14,7 @@
     <servlet-name>MyOrders</servlet-name>
     <url-pattern>/MyOrders</url-pattern>
   </servlet-mapping>
+
   <servlet>
     <servlet-name>AllOrders</servlet-name>
     <servlet-class>orders.AllOrders</servlet-class>
@@ -20,6 +23,7 @@
     <servlet-name>AllOrders</servlet-name>
     <url-pattern>/AllOrders</url-pattern>
   </servlet-mapping>
+
   <servlet>
     <servlet-name>UpdateOrder</servlet-name>
     <servlet-class>orders.UpdateOrder</servlet-class>
@@ -28,6 +32,7 @@
     <servlet-name>UpdateOrder</servlet-name>
     <url-pattern>/UpdateOrder</url-pattern>
   </servlet-mapping>
+
   <servlet>
     <servlet-name>SearchForm</servlet-name>
     <servlet-class>products.SearchForm</servlet-class>
@@ -36,6 +41,7 @@
     <servlet-name>SearchForm</servlet-name>
     <url-pattern>/SearchForm</url-pattern>
   </servlet-mapping>
+
   <servlet>
     <servlet-name>SearchResult</servlet-name>
     <servlet-class>products.SearchResult</servlet-class>
@@ -53,6 +59,7 @@
     <servlet-name>ShoppingCart</servlet-name>
     <url-pattern>/ShoppingCart</url-pattern>
   </servlet-mapping>
+
   <servlet>
     <servlet-name>Logout</servlet-name>
     <servlet-class>controllers.Logout</servlet-class>
@@ -61,6 +68,13 @@
     <servlet-name>Logout</servlet-name>
     <url-pattern>/Logout</url-pattern>
   </servlet-mapping>
+
+  <error-page>
+      <!-- Forbidden directory listing -->
+      <error-code>403</error-code>
+      <location>/index-403.html</location>
+  </error-page>
+
   <resource-ref>
     <res-ref-name>jdbc/ShoppingCart</res-ref-name>
     <res-type>javax.sql.DataSource</res-type>
@@ -78,6 +92,7 @@
       <web-resource-name>protected</web-resource-name>
       <url-pattern>/SearchForm</url-pattern>
       <url-pattern>/SearchResult</url-pattern>
+      <url-pattern>/MyOrders</url-pattern>
       <url-pattern>/ShoppingCart</url-pattern>
       <http-method>GET</http-method>
       <http-method>POST</http-method>
@@ -89,8 +104,8 @@
   <security-constraint>
     <web-resource-collection>
       <web-resource-name>protected</web-resource-name>
-      <url-pattern>/Admin/Orders</url-pattern>
-      <url-pattern>/Admin/UpdateOrder</url-pattern>
+      <url-pattern>/AllOrders</url-pattern>
+      <url-pattern>/UpdateOrder</url-pattern>
       <http-method>GET</http-method>
       <http-method>POST</http-method>
     </web-resource-collection>

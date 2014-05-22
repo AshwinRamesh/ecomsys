@@ -24,7 +24,6 @@ public class AllOrders extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Get user
         HttpSession session = request.getSession();
-        System.out.println(request.getUserPrincipal().getName());
         // Get all user's orders
         try {
             String user = request.getUserPrincipal().getName();
@@ -60,5 +59,5 @@ public class AllOrders extends HttpServlet {
 		// redirect to SearchForm
 		response.sendRedirect("logout.html");
 	}
-    
+
 }

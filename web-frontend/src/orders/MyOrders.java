@@ -20,12 +20,11 @@ import orders.model.Order;
 public class MyOrders extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// Get user
 		HttpSession session = request.getSession();
 		Enumeration<String> attributes = session.getAttributeNames();
-		System.out.println(request.getUserPrincipal().getName());
 		// Get all user's orders
 		try {
 			String user = request.getUserPrincipal().getName();
@@ -50,9 +49,9 @@ public class MyOrders extends HttpServlet {
 		// Send request
 		RequestDispatcher view = request.getRequestDispatcher("myorders.jsp");
 		view.forward(request,response);
-	
-	
-	
+
+
+
 	}
-	
+
 }
