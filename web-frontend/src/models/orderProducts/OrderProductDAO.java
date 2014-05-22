@@ -1,4 +1,4 @@
-package orderProducts.dao;
+package models.orderProducts;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,8 +13,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import orders.model.Order;
-import orderProducts.model.OrderProduct;
+import orders.model.Order;  // TODO - fix
+import orderProducts.model.OrderProduct; // TODO - fix
 
 public class OrderProductDAO {
     private DataSource ds;
