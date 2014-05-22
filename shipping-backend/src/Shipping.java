@@ -3,6 +3,8 @@ import java.io.PrintWriter;
 
 
 
+import java.util.Enumeration;
+
 // import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,9 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /**
  * Servlet implementation class Shipping
@@ -29,21 +28,20 @@ public class Shipping extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// not needed
-    	
-	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("Order Recieved.");
 		// receive params (city name, number of items) -- in this format?
-		String city = request.getParameter("city");
+		Enumeration<String> name = request.getParameterNames();
+		while (name.hasMoreElements()) {
+			System.out.println(name.nextElement());
+		}
+		String city = request.getParameter("city").toLowerCase();  // convert to lower case
 		int quantity = Integer.parseInt(request.getParameter("quantity"));
+		System.out.println("Order Details: City - " + city + " Quantity - " + quantity);
 		// load XML, both in order
     	String cities = getServletConfig().getInitParameter("Cities");
     	String[] cityList = cities.split(",");
@@ -57,43 +55,32 @@ public class Shipping extends HttpServlet {
     			break;
     		}
     	}
+    	
+    	String resultString = "{\"status\": %s, \"message\": %s, \"cost\": %/.2f}";
+    	
     	/** return error if not found */
+    	PrintWriter out = response.getWriter();
     	if(pos == 0){
-    		String result = "Error";
-    		// convert to JSON
-    		JSONObject resultObj = new JSONObject();
-    		try {
-				resultObj.put("shipping", result);
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
     		// set content type for response
         	response.setContentType("application/json");
         	// Return with a printwriter
-        	PrintWriter out = response.getWriter();
-        	out.print(result);
-        	out.flush();
+        	out.print(String.format(resultString, "false", "City not available for shipping.", 0.0));
+        	System.out.println("Invalid shipping city address.");
+    	} else {
+        	/** Otherwise, calculate shippping price and return */
+        	// get corresponding price from priceList and convert
+        	String shippingPriceString = priceList[pos];
+        	int shippingPriceVal = Integer.parseInt(shippingPriceString);
+    		// multiply price by number of items
+        	int result = quantity*shippingPriceVal;
+    		// set content type for response
+        	response.setContentType("application/json");
+        	// Return with a printwriter
+        	out.print(String.format(resultString, "true", "Success", result));	
+        	System.out.println("Shipping cost for order: " + result);
     	}
-    	/** Otherwise, calculate shippping price and return */
-    	// get corresponding price from priceList and convert
-    	String shippingPriceString = priceList[pos];
-    	int shippingPriceVal = Integer.parseInt(shippingPriceString);
-		// multiply price by number of items
-    	int result = quantity*shippingPriceVal;
-		// convert to JSON
-		JSONObject resultObj = new JSONObject();
-		try {
-			resultObj.put("shipping", result);
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		// set content type for response
-    	response.setContentType("application/json");
-    	// Return with a printwriter
-    	PrintWriter out = response.getWriter();
-    	out.print(result);
+    	System.out.println("Finished processing order's shipping cost.");
     	out.flush();
-    	
 	}
 
 }

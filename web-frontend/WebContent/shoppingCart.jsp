@@ -2,7 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-          
+
                 <div class="row">
                     <div class="col-sm-12 col-md-10 col-md-offset-1">
                     	<c:set var="len" value="${fn:length(items)}"/>
@@ -25,7 +25,7 @@
                                         </div>
                                     </div></td>
                                     <td class="col-sm-1 col-md-1" style="text-align: center">
-                                    <input type="email" class="form-control" id="exampleInputEmail1" value="1">
+                                    <input disabled class="form-control" id="quantity" value="1">
                                     </td>
                                     <td class="col-sm-1 col-md-1 text-center"><strong>$${item.price}</strong></td>
                                     <td class="col-sm-1 col-md-1 text-center"><strong>$${item.price}</strong></td>
