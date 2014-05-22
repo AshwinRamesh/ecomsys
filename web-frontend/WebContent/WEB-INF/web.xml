@@ -7,6 +7,15 @@
   </welcome-file-list>
 
   <servlet>
+    <servlet-name>indexPage</servlet-name>
+    <servlet-class>controllers.indexPage</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>indexPage</servlet-name>
+    <url-pattern>/indexPage</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
     <servlet-name>MyOrders</servlet-name>
     <servlet-class>orders.MyOrders</servlet-class>
   </servlet>
@@ -104,6 +113,7 @@
       <url-pattern>/MyOrders</url-pattern>
       <url-pattern>/ShoppingCart</url-pattern>
       <url-pattern>/Checkout</url-pattern>
+      <url-pattern>/indexPage</url-pattern>
       <http-method>GET</http-method>
       <http-method>POST</http-method>
     </web-resource-collection>
@@ -116,6 +126,7 @@
       <web-resource-name>protected</web-resource-name>
       <url-pattern>/AllOrders</url-pattern>
       <url-pattern>/UpdateOrder</url-pattern>
+      <url-pattern>/indexPage</url-pattern>
       <http-method>GET</http-method>
       <http-method>POST</http-method>
     </web-resource-collection>
