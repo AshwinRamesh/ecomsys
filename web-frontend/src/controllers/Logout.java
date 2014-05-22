@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import products.model.Cart;
 
@@ -30,8 +31,8 @@ public class Logout extends HttpServlet {
 
 		response.setHeader("Cache-Control", "no-cache, no-store");
 		response.setHeader("Pragma", "no-cache");
-
-		Cart shoppingCart = (Cart)getServletContext().getAttribute("shoppingCart");
+		HttpSession session = request.getSession();
+		Cart shoppingCart = (Cart)session.getAttribute("shoppingCart");
 		shoppingCart.emptyCart();
 
 		request.getSession().invalidate();

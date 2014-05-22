@@ -41,7 +41,7 @@ public class SearchForm extends HttpServlet {
 		session.setMaxInactiveInterval(60*30);
 		shoppingCart.setSessId(sessId);
 		
-		getServletContext().setAttribute("shoppingCart", shoppingCart);
+		session.setAttribute("shoppingCart", shoppingCart);
 		
 		RequestDispatcher view = request.getRequestDispatcher("search.html");
 		view.forward(request,response);

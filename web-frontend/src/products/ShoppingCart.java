@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import products.model.Cart;
 import products.model.FlickrPhoto;
@@ -31,22 +32,23 @@ public class ShoppingCart extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String photoId = request.getParameter("photoId");
 		String action = request.getParameter("action");
-		List<FlickrPhoto> photos = (List<FlickrPhoto>)getServletContext().getAttribute("photos");
-		Cart shoppingCart = (Cart)getServletContext().getAttribute("shoppingCart");
+		HttpSession session = request.getSession();
+		List<FlickrPhoto> photos = (List<FlickrPhoto>)session.getAttribute("photos");
+		Cart shoppingCart = (Cart)session.getAttribute("shoppingCart");
 	
 		if(action.equals("addToCart")){
 			synchronized(shoppingCart){
 				shoppingCart.addItem(photoId, photos);
-				getServletContext().setAttribute("shoppingCart", shoppingCart);
+				session.setAttribute("shoppingCart", shoppingCart);
 			}	
 			response.setStatus(response.SC_OK);
 
 		}else if(action.equals("removeFromCart")){
 			synchronized(shoppingCart){
 				shoppingCart.removeItem(photoId);
-				getServletContext().setAttribute("shoppingCart", shoppingCart);
-				getServletContext().setAttribute("items", shoppingCart.getItems());
-				getServletContext().setAttribute("total", shoppingCart.getTotal());
+				session.setAttribute("shoppingCart", shoppingCart);
+				session.setAttribute("items", shoppingCart.getItems());
+				session.setAttribute("total", shoppingCart.getTotal());
 			}	
 			
 			RequestDispatcher view = request.getRequestDispatcher("shoppingCart.jsp");
@@ -54,9 +56,9 @@ public class ShoppingCart extends HttpServlet {
 				//response.setStatus(response.SC_OK);
 		}else if(action.equals("showCart")){
 			response.setStatus(response.SC_OK);
-			getServletContext().setAttribute("items", shoppingCart.getItems());
+			session.setAttribute("items", shoppingCart.getItems());
 			RequestDispatcher view = request.getRequestDispatcher("shoppingCart.jsp");
-			getServletContext().setAttribute("total", shoppingCart.getTotal());
+			session.setAttribute("total", shoppingCart.getTotal());
 			view.forward(request,response);			
 		}else{
 			response.sendError(response.SC_NOT_FOUND,"Action Not Found");
