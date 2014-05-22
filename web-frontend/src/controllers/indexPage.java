@@ -28,6 +28,9 @@ public class indexPage extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setHeader("Cache-Control", "no-cache, no-store");
+		response.setHeader("Pragma", "no-cache");
+
 		String remoteUser = request.getRemoteUser();
 		System.out.println(remoteUser);
 		if(remoteUser == null){
