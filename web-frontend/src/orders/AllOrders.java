@@ -51,13 +51,4 @@ public class AllOrders extends HttpServlet {
         view.forward(request,response);
     }
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// expire session
-		HttpSession session = request.getSession();
-		session.invalidate();
-		// TODO - empty the servlet context
-		// redirect to SearchForm
-		response.sendRedirect("logout.html");
-	}
-
 }
