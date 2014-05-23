@@ -15,12 +15,13 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.NodeList;
 
+import org.json.*;
 import java.util.*;
 
 
 public class ShipRestApi {
 
-    public JSONObject getShippingCost(String city, int quantity){
+    public Shipping getShippingCost(String city, int quantity){
 
     	try {
     	String urlParameters = "city=" + city + "&quantity=" + Integer.toString(quantity);
@@ -42,13 +43,17 @@ public class ShipRestApi {
         StringBuffer sb = new StringBuffer();
 
         while ((in = br.readLine()) != null) {
-            sb.append(in + "\n");
+            sb.append(in);
         }
-        System.out.println(sb.toString());
-        connection.disconnect();
-    	JSONObject jObj = new JSONObject(sb.toString());
-    	return jObj;
+        String s = sb.toString();
+        try{
+        	connection.disconnect();	
+        } catch (Exception e) {}
+    	JSONObject jObj = new JSONObject(s);  	
+    	Shipping ship = new Shipping(jObj.getBoolean("status"), jObj.getString("message"), jObj.getDouble("cost"));
+    	return ship;
     	} catch (Exception e) {
+    		System.out.println(e.getMessage());
     		return null;
     	}
 

@@ -58,7 +58,7 @@ public class Shipping extends HttpServlet {
         		// set content type for response
             	response.setContentType("application/json");
             	// Return with a printwriter
-            	out.print(String.format(resultString, "false", "City not available for shipping.", "false"));
+            	out.print(String.format(resultString, "false", "City not available for shipping.", "0.0"));
             	System.out.println("Invalid shipping city address.");
         	} else {
             	/** Otherwise, calculate shippping price and return */
@@ -79,7 +79,7 @@ public class Shipping extends HttpServlet {
     		// set content type for response
         	response.setContentType("application/json");
         	// Return with a printwriter
-        	out.print(String.format(resultString, "false", "Error parsing parameters", "false"));
+        	out.print(String.format(resultString, "false", "Error parsing parameters", "0.0"));
         	System.out.println("Server Error - invalid params.");	
     	}
 

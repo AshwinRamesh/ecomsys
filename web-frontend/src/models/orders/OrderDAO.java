@@ -17,6 +17,7 @@ import javax.sql.DataSource;
 
 public class OrderDAO {
     private DataSource ds;
+    private String getUserId = "SELECT id FROM users WHERE username = ? LIMIT 1";
     private String getOrdersByUser = "SELECT * FROM orders WHERE user_id = (SELECT id FROM users WHERE username = ?)";
     private String getAllOrders = "SELECT * FROM orders";
     private String createOrder = "INSERT into orders (user_id, status, shipping_address_1, shipping_address_2, city, postcode, final_cost, ship_cost, product_cost) VALUES (?,?,?,?,?,?,?,?,?)";
@@ -35,6 +36,30 @@ public class OrderDAO {
         }
     }
 
+    public Integer getUserId(String username) {
+        try{
+            Connection c = ds.getConnection();
+            PreparedStatement ps = c.prepareStatement(getUserId);
+            ps.setString(1, username);
+            ResultSet rs = ps.executeQuery();
+            boolean res = rs.next();
+            Integer id;
+            if (res){
+            	id = rs.getInt("id");
+            } else {
+            	id = null;
+            }
+            rs.close();
+            ps.close();
+            c.close();
+            return id;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            System.out.println("Error in getting user id");
+            return null;
+        }
+    }
+
     public Boolean insertOrder(Order o) {
         try{
             Connection c = ds.getConnection();
@@ -48,7 +73,7 @@ public class OrderDAO {
             ps.setString(7, String.valueOf(o.getFinalCost()));
             ps.setString(8, String.valueOf(o.getShipCost()));
             ps.setString(9, String.valueOf(o.getCost()));
-            
+
 
             int affectedRows = ps.executeUpdate();
             if (affectedRows != 1) {

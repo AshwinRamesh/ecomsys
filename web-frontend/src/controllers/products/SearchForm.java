@@ -4,6 +4,7 @@
 package controllers.products;
 
 import java.io.IOException;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,6 +17,7 @@ import org.json.JSONObject;
 
 import models.products.Cart;
 import ShippingAPI.ShipRestApi;
+import ShippingAPI.Shipping;
 
 /**
  * @author Mojtaba
@@ -42,17 +44,6 @@ public class SearchForm extends HttpServlet {
 		String sessId = session.getId();
 		session.setMaxInactiveInterval(60*30);
 		shoppingCart.setSessId(sessId);
-		ShipRestApi a = new ShipRestApi();
-		try {
-			JSONObject jObj = a.getShippingCost("sydney", 3);
-			System.out.println(jObj.get("status"));
-			System.out.println(jObj.get("cost"));
-			System.out.println(jObj.get("message"));
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
 		session.setAttribute("shoppingCart", shoppingCart);
 		
 		RequestDispatcher view = request.getRequestDispatcher("search.html");

@@ -132,8 +132,8 @@
               success:function(data, textStatus, jqXHR)
               {
                   if (data.status) {
-                    $("#shipCost").text("$" + data.shipCost).show();
-                    $("#finalCost").text("$" + data.finalCost).show;
+                    $("#shipCost").text("Shipping Cost: $" + data.shipCost).show();
+                    $("#finalCost").text("Final Cost: $" + data.finalCost).show();
                     $("#submitOrderForm").hide();
                     alert("Order Submitted!");
                   } else {
