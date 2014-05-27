@@ -12,12 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import models.products.Cart;
-import ShippingAPI.ShipRestApi;
-import ShippingAPI.Shipping;
+
 
 /**
  * @author Mojtaba
