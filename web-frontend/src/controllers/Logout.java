@@ -38,6 +38,6 @@ public class Logout extends HttpServlet {
 		} catch(Exception e) {}
 
 		request.getSession().invalidate();
-		response.sendRedirect(request.getContextPath() + "/");
+		response.sendRedirect(request.getContextPath() + "/indexPage");
 	}
 }
