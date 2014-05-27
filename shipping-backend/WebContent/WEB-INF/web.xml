@@ -29,4 +29,8 @@
     <servlet-name>Shipping</servlet-name>
     <url-pattern>/Shipping</url-pattern>
   </servlet-mapping>
+  
+  	<listener>
+		<listener-class>AppServletContextListener</listener-class>
+	</listener>
 </web-app>
