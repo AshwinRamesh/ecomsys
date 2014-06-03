@@ -34,7 +34,6 @@ public class FlickrRestApi {
 
             return response;
         }catch (Exception e){
-            System.out.println(e.toString());
             return null;
         }
     }
@@ -77,7 +76,6 @@ public class FlickrRestApi {
             }
             return photos;
         }catch (Exception e){
-            System.out.println(e.toString());
             return null;
         }
     }
