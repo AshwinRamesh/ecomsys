@@ -33,6 +33,15 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>DiscardCart</servlet-name>
+    <servlet-class>controllers.orders.DiscardCart</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DiscardCart</servlet-name>
+    <url-pattern>/DiscardCart</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>Checkout</servlet-name>
     <servlet-class>controllers.orders.Checkout</servlet-class>
   </servlet>
