@@ -53,8 +53,8 @@ CREATE TABLE `order_products` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO users (username, password) VALUES ("userA", "passwordA");
-INSERT INTO user_roles(user_name, user_role) VALUES ("userA", "user");
+INSERT INTO user_roles(username, user_role) VALUES ("userA", "user");
 INSERT INTO users (username, password) VALUES ("userB", "passwordB");
-INSERT INTO user_roles(user_name, user_role) VALUES ("userB", "user");
+INSERT INTO user_roles(username, user_role) VALUES ("userB", "user");
 INSERT INTO users (username, password) VALUES ("admin", "admin");
-INSERT INTO user_roles(user_name, user_role) VALUES ("admin", "admin");
+INSERT INTO user_roles(username, user_role) VALUES ("admin", "admin");
