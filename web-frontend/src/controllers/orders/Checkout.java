@@ -49,7 +49,7 @@ public class Checkout extends HttpServlet {
 				if (costObj.getStatus()) {  // true - cost retrieved
 					OrderDAO oDao = new OrderDAO();
 					Order o = new Order(oDao.getUserId(request.getUserPrincipal().getName()), "processing", request.getParameter("add1"),
-									request.getParameter("add2"), city, request.getParameter("postcode"), shoppingCart.getTotal(), 
+									request.getParameter("add2"), city, request.getParameter("postcode"), shoppingCart.getTotal(),
 									costObj.getCost(), shoppingCart.getTotal()+costObj.getCost());
 					boolean res = oDao.insertOrder(o);  // attempt to insert order
 					OrderProductDAO opDao = new OrderProductDAO();
@@ -65,7 +65,6 @@ public class Checkout extends HttpServlet {
 						}
 						Double totalCost = shoppingCart.getTotal()+costObj.getCost();
 						outString = "{\"status\":true, \"shipCost\":" + costObj.getCost() + ", \"finalCost\": " + totalCost + "}";
-						System.out.println(outString);
 					} else {  // issue inserting order
 						outString = "{\"status\":false}";
 					}
@@ -73,8 +72,8 @@ public class Checkout extends HttpServlet {
 					outString = "{\"status\":false}";
 				}
 			} catch (Exception e) {	outString = "{\"status\":false}";}
-		
+
 		out.print(outString); // add json object here
-		out.flush();	
+		out.flush();
 	}
 }

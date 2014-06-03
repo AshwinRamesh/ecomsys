@@ -69,10 +69,7 @@ public class FlickrRestApi {
                     try {
                         photo.setUrlOriginal(node.getNamedItem("url_o").getTextContent());
                     } catch(Exception e) {
-                        photo.setUrlOriginal(node.getNamedItem("url_t").getTextContent());
-                        //System.out.println(e.toString());
-                        //System.out.println(e.getMessage());
-                    }
+                        photo.setUrlOriginal(node.getNamedItem("url_t").getTextContent());                    }
                     photo.setUrlThumb(node.getNamedItem("url_t").getTextContent());
                     photo.setPrice(Constants.FIXED_PRICE+((tagsSplit.length) * Constants.PRICE_PER_TAG));
                     photos.add(photo);

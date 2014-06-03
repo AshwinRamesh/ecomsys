@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/Shipping")
 public class Shipping extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -25,9 +25,6 @@ public class Shipping extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	doPost(request, response);
-    }
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -46,7 +43,7 @@ public class Shipping extends HttpServlet {
         	String prices = getServletConfig().getInitParameter("Prices");
         	String[] priceList = prices.split(",");
         	String basePrices = getServletConfig().getInitParameter("BasePrices");
-        	String[] basePriceList = basePrices.split(","); 
+        	String[] basePriceList = basePrices.split(",");
         	// get corresponding city from cityList
         	Integer pos = null;
         	for (int i = 0; i < cityList.length; i++) {
@@ -54,7 +51,7 @@ public class Shipping extends HttpServlet {
         			pos = i;
         			//break;
         		}
-        	}	
+        	}
         	/** return error if not found */
         	if(pos == null){
         		// set content type for response
@@ -82,11 +79,11 @@ public class Shipping extends HttpServlet {
         	response.setContentType("application/json");
         	// Return with a printwriter
         	out.print(String.format(resultString, "false", "Error parsing parameters", "0.0"));
-        	System.out.println("Server Error - invalid params.");	
+        	System.out.println("Server Error - invalid params.");
     	}
 
     	System.out.println("Finished processing order's shipping cost.");
     	out.flush();
 	}
-	
+
 }

@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package controllers;
 
@@ -21,7 +21,7 @@ public class indexPage extends HttpServlet {
 
 
 	/**
-	 * 
+	 *
 	 */
 	public indexPage() {
 		// TODO Auto-generated constructor stub
@@ -32,7 +32,6 @@ public class indexPage extends HttpServlet {
 		response.setHeader("Pragma", "no-cache");
 
 		String remoteUser = request.getRemoteUser();
-		System.out.println(remoteUser);
 		if(remoteUser == null){
 			RequestDispatcher view = request.getRequestDispatcher("login.html");
 			view.forward(request,response);
@@ -41,7 +40,7 @@ public class indexPage extends HttpServlet {
 		}else{
 			response.sendRedirect("SearchForm");
 		}
-		
+
 	}
 
 }

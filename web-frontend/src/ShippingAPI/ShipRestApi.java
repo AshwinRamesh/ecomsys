@@ -14,13 +14,13 @@ public class ShipRestApi {
 
     	try {
     	String urlParameters = "city=" + city + "&quantity=" + Integer.toString(quantity);
-    	URL url = new URL(Constants.URL+"?"+urlParameters); 
-    	HttpURLConnection connection = (HttpURLConnection) url.openConnection();           
+    	URL url = new URL(Constants.URL+"?"+urlParameters);
+    	HttpURLConnection connection = (HttpURLConnection) url.openConnection();
     	connection.setDoOutput(true);
     	connection.setDoInput(true);
-    	connection.setInstanceFollowRedirects(false); 
-    	connection.setRequestMethod("POST"); 
-    	connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded"); 
+    	connection.setInstanceFollowRedirects(false);
+    	connection.setRequestMethod("POST");
+    	connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
     	connection.setRequestProperty("charset", "utf-8");
     	//connection.setRequestProperty("Content-Length", "" + Integer.toString(urlParameters.getBytes().length));
     	connection.setUseCaches (false);
@@ -36,13 +36,12 @@ public class ShipRestApi {
         }
         String s = sb.toString();
         try{
-        	connection.disconnect();	
+        	connection.disconnect();
         } catch (Exception e) {}
-    	JSONObject jObj = new JSONObject(s);  	
+    	JSONObject jObj = new JSONObject(s);
     	Shipping ship = new Shipping(jObj.getBoolean("status"), jObj.getString("message"), jObj.getDouble("cost"));
     	return ship;
     	} catch (Exception e) {
-    		System.out.println(e.getMessage());
     		return null;
     	}
 

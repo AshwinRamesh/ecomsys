@@ -52,7 +52,6 @@ public class OrderProductDAO {
             c.close();
             return true;
         } catch (SQLException e) {
-        	System.out.println(e.getMessage());
             System.out.println("Error in creating order product;");
             return false;
         }
@@ -80,7 +79,6 @@ public class OrderProductDAO {
             c.close();
             return orderProducts;
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
             System.out.println("Error in getting user order products");
             return null;
         }
