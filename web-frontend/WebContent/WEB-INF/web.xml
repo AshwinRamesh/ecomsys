@@ -14,7 +14,6 @@
     <servlet-name>indexPage</servlet-name>
     <url-pattern>/indexPage</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>MyOrders</servlet-name>
     <servlet-class>controllers.orders.MyOrders</servlet-class>

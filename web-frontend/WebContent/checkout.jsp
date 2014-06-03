@@ -21,7 +21,7 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="#">Flickr E-commerce System</a>
+    <a class="navbar-brand" href="indexPage">Flickr E-commerce System</a>
   </div>
 
   <!-- Collect the nav links, forms, and other content for toggling -->
@@ -30,7 +30,7 @@
     </div>
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">User<b class="caret"></b></a>
+        <a href="IndexPage" class="dropdown-toggle" data-toggle="dropdown">User<b class="caret"></b></a>
         <ul class="dropdown-menu">
           <li><a href="MyOrders">My Orders</a></li>
           <li><form action="Logout" method="post" accept-charset="utf-8">
@@ -104,6 +104,15 @@
               <div class="form-group">
                 <div class="col-sm-offset-8 col-sm-4">
                   <button type="submit" class="btn btn-primary">Place Order</button>
+                </div>
+              </div>
+            </form>
+            <form action="DiscardCart" method="post" accept-charset="utf-8">
+              <div class="form-horizontal">
+                <div class="form-group">
+                  <div class="col-sm-offset-8 col-sm-4">
+                  <button type="submit" class="btn btn-danger">Discard Cart</button>
+                </div>
                 </div>
               </div>
             </form>

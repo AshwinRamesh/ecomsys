@@ -21,7 +21,7 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="#">Flickr E-commerce System</a>
+    <a class="navbar-brand" href="indexPage">Flickr E-commerce System</a>
   </div>
 
   <!-- Collect the nav links, forms, and other content for toggling -->
