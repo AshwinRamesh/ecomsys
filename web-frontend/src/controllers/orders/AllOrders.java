@@ -33,7 +33,6 @@ public class AllOrders extends HttpServlet {
                 request.setAttribute("orders_exist", true);
                 for (int i=0; i<orders.size(); i++) {
                     orders.get(i).setProducts(opDAO.getOrderProductsForOrder(orders.get(i).getOrderId()));
-                    System.out.println(orders.get(i).getProducts().size());
                 }
                 request.setAttribute("user", user);
                 request.setAttribute("orders", orders);
