@@ -64,6 +64,7 @@ public class Checkout extends HttpServlet {
 							opDao.insertOrderProudct(op);
 						}
 						Double totalCost = shoppingCart.getTotal()+costObj.getCost();
+						shoppingCart.emptyCart();
 						outString = "{\"status\":true, \"shipCost\":" + costObj.getCost() + ", \"finalCost\": " + totalCost + "}";
 					} else {  // issue inserting order
 						outString = "{\"status\":false}";
